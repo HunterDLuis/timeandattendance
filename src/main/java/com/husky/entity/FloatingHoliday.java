@@ -1,10 +1,6 @@
 package com.husky.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Time;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,59 +9,62 @@ import java.util.Date;
 @Entity
 public class FloatingHoliday {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "floating")
+    private Long id;
     private Date date;
-    private Time hours;
-    private String user_gender;
-    private String user_parent;
+    @Column(name = "hour")
+    private int  hour;
+    @Enumerated(EnumType.STRING)
+    private Gender userGender;
+    private boolean userParent;
     private String description;
 
     public FloatingHoliday() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public int getHour() {
+        return hour;
     }
 
-    public Time getHours() {
-        return hours;
+    public Gender getUserGender() {
+        return userGender;
     }
 
-    public void setHours(Time hours) {
-        this.hours = hours;
-    }
-
-    public String getUser_gender() {
-        return user_gender;
-    }
-
-    public void setUser_gender(String user_gender) {
-        this.user_gender = user_gender;
-    }
-
-    public String getUser_parent() {
-        return user_parent;
-    }
-
-    public void setUser_parent(String user_parent) {
-        this.user_parent = user_parent;
+    public boolean isUserParent() {
+        return userParent;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public void setUserGender(Gender userGender) {
+        this.userGender = userGender;
+    }
+
+    public void setUserParent(boolean userParent) {
+        this.userParent = userParent;
     }
 
     public void setDescription(String description) {

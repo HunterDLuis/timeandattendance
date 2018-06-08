@@ -1,5 +1,7 @@
 package com.husky.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,55 +11,64 @@ import java.util.Date;
 @Entity
 public class Request {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
-    @ManyToOne
-    private User userId;
-    @ManyToOne
-    private FloatingHoliday floatingHolidayId;
-    private Date date;
-    private String requestStatus;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "request")
+    private Long id;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user")
+    @JsonBackReference
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "floating")
+    private FloatingHoliday floating;
+
+    private Date dateSend;
+
+    private String statusRequest;
 
     public Request() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public User getUser() {
+        return user;
+    }
+
+    public FloatingHoliday getFloating() {
+        return floating;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setUser(User userId) {
-        this.userId = userId;
+    public void setFloating(FloatingHoliday floating) {
+        this.floating = floating;
     }
 
-    public FloatingHoliday getFloatingHolidayId() {
-        return floatingHolidayId;
+    public Date getDateSend() {
+        return dateSend;
     }
 
-    public void setFloatingHoliday(FloatingHoliday floatingHolidayId) {
-        this.floatingHolidayId = floatingHolidayId;
+    public void setDateSend(Date dateSend) {
+        this.dateSend = dateSend;
     }
 
-    public Date getDate() {
-        return date;
+    public String getStatusRequest() {
+        return statusRequest;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getRequestStatus() {
-        return requestStatus;
-    }
-
-    public void setRequestStatus(String requestStatus) {
-        this.requestStatus = requestStatus;
+    public void setStatusRequest(String statusRequest) {
+        this.statusRequest = statusRequest;
     }
 }

@@ -6,12 +6,15 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "user")
     private Long id;
     private String name;
     private String lastname;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    private boolean isParent;
+
+    private boolean isparent;
 
 
     public User() {}
@@ -48,11 +51,11 @@ public class User {
         this.gender = gender;
     }
 
-    public boolean isParent() {
-        return isParent;
+    public boolean isIsparent() {
+        return isparent;
     }
 
-    public void setParent(boolean parent) {
-        isParent = parent;
+    public void setIsparent(boolean isparent) {
+        this.isparent = isparent;
     }
 }
