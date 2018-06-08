@@ -27,8 +27,8 @@ public class RequestController {
     private FloatingHolidayRepository floatingHolidayRepository;
 
     @RequestMapping(value = "/users/{id}/requests", method = RequestMethod.GET)
-    public Request getRequestById(@PathVariable Long id){
-        return requestRepository.findById(id).get();
+    public List<Request> getRequestById(@PathVariable Long id){
+        return requestRepository.findByUserId(id);
     }
 
     /*@RequestMapping(value ="/users/{id}/requests/{id}", method = RequestMethod.GET)

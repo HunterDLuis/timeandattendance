@@ -1,21 +1,25 @@
 package com.husky.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "user")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name = "user")
     private Long id;
     private String name;
     private String lastname;
-
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
     private boolean isparent;
 
+    //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
+    //private List<Request> requests;
+    private Collection<Request> requests;
 
     public User() {}
 
@@ -57,5 +61,13 @@ public class User {
 
     public void setIsparent(boolean isparent) {
         this.isparent = isparent;
+    }
+
+    public Collection<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Collection<Request> requests) {
+        this.requests = requests;
     }
 }

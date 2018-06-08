@@ -1,7 +1,9 @@
 package com.husky.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Luis on 03/06/2018.
@@ -10,7 +12,7 @@ import java.util.Date;
 public class FloatingHoliday {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "floating")
+    //@Column(name = "floating")
     private Long id;
     private Date date;
     @Column(name = "hour")
@@ -20,7 +22,15 @@ public class FloatingHoliday {
     private boolean userParent;
     private String description;
 
+    //@OneToMany(mappedBy = "floatingHoliday", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "floatingHoliday")
+    //private List<Request> requests;
+    private Collection<Request> requests;
     public FloatingHoliday() {
+    }
+
+    public FloatingHoliday(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -69,5 +79,21 @@ public class FloatingHoliday {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /*public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }*/
+
+    public Collection<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Collection<Request> requests) {
+        this.requests = requests;
     }
 }

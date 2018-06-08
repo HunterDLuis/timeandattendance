@@ -12,5 +12,5 @@ import java.util.List;
  * Created by Luis on 04/06/2018.
  */
 public interface RequestRepository extends JpaRepository<Request, Long>{
-    List<Request> findByUserId(Long user);
+    List<Request> findByUserId(Long id);
 }

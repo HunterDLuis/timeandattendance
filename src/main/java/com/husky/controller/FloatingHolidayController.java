@@ -18,6 +18,11 @@ public class FloatingHolidayController {
     @Inject
     private FloatingHolidayRepository floatingHolidayRepository;
 
+    @RequestMapping(value = "/floatings", method = RequestMethod.GET)
+    public List<FloatingHoliday> getAllFloating(){
+        return floatingHolidayRepository.findAll();
+    }
+
     @RequestMapping(value = "/floatings", method = RequestMethod.POST)
     public FloatingHoliday addFloating(@RequestBody FloatingHoliday newFloating){
         return floatingHolidayRepository.save(newFloating);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Luis on 03/06/2018.
@@ -12,18 +13,20 @@ import java.util.Date;
 public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "request")
+    //@Column(name = "request")
     private Long id;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user")
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, unique = true)
+    //@JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "floating")
-    private FloatingHoliday floating;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "floatingHoliday_id", referencedColumnName = "id", nullable = false, unique = true)
+    //@JoinColumn(name = "floatingHoliday_id")
+    private FloatingHoliday floatingHoliday;
 
     private Date dateSend;
 
@@ -40,9 +43,6 @@ public class Request {
         return user;
     }
 
-    public FloatingHoliday getFloating() {
-        return floating;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -52,9 +52,6 @@ public class Request {
         this.user = user;
     }
 
-    public void setFloating(FloatingHoliday floating) {
-        this.floating = floating;
-    }
 
     public Date getDateSend() {
         return dateSend;
@@ -70,5 +67,13 @@ public class Request {
 
     public void setStatusRequest(String statusRequest) {
         this.statusRequest = statusRequest;
+    }
+
+    public FloatingHoliday getFloatingHoliday() {
+        return floatingHoliday;
+    }
+
+    public void setFloatingHoliday(FloatingHoliday floatingHoliday) {
+        this.floatingHoliday = floatingHoliday;
     }
 }
